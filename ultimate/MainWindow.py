@@ -212,6 +212,19 @@ class MainWindow(QMainWindow):
         if packets is None:
             return
         for p in packets:
+            if p.pitch > 85:
+                p.pitch -= 170
+            if p.pitch < -85:
+                p.pitch += 170
+            if p.yaw > 180:
+                p.yaw -= 360
+            if p.yaw < -180:
+                p.yaw += 360
+            if p.roll > 90:
+                p.roll -= 180
+            if p.roll < -90:
+                p.roll += 180
+            
             self.navball.setAngle(p.pitch, p.yaw, p.roll)
             self.pfd.pitch = p.pitch * math.pi / 180
             self.pfd.roll = p.roll * math.pi / 180

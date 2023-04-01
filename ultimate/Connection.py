@@ -26,14 +26,8 @@ def make_dummy_connection():
             packet.packet_no += 1
             packet.timestamp = int(time.time())
             packet.roll += 10
-            if packet.roll > 90:
-                packet.roll -= 180
             packet.pitch -= 5
-            if packet.pitch < -85:
-                packet.pitch += 170
             packet.yaw += 5
-            if packet.yaw > 180:
-                packet.yaw -= 360
             packet.horizontal_speed += 1
             packet.horizontal_acceleration += 0.3
             packet.displacement += 10
