@@ -30,5 +30,4 @@ setup(
         'ultimate': ['assets/*.png'],
         'ultimate': ['assets/*.ico'],
     },
-    include_package_data=True,
 )
