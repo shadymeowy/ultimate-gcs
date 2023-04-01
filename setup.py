@@ -27,8 +27,8 @@ setup(
     extras_require={
     },
     package_data={
-        'ultimate': ['*.png'],
-        'ultimate': ['*.ico'],
+        'ultimate': ['assets/*.png'],
+        'ultimate': ['assets/*.ico'],
     },
     include_package_data=True,
 )
