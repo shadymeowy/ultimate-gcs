@@ -31,6 +31,7 @@ def make_dummy_connection():
             packet.horizontal_speed += 1
             packet.horizontal_acceleration += 0.3
             packet.displacement += 10
+            update_crc(packet)
             queue.put(packet.copy())
             time.sleep(1)
 

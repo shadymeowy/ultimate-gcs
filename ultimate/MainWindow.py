@@ -212,6 +212,8 @@ class MainWindow(QMainWindow):
         if packets is None:
             return
         for p in packets:
+            if not check_packet(p):
+                continue
             if p.pitch > 85:
                 p.pitch -= 170
             if p.pitch < -85:
