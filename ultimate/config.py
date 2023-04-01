@@ -1,10 +1,10 @@
 APP_NAME = 'Ultimate Thingy'
 import pkg_resources
-ASSETS = 'ultimate'
-APP_ICON = pkg_resources.resource_filename(ASSETS, 'assets/icon.ico')
-APP_ICON_LARGE = pkg_resources.resource_filename(ASSETS, 'assets/icon.png')
-CURSOR_MASK = pkg_resources.resource_filename(ASSETS, 'assets/cursor_mask.png')
-NAVBALL_MASK = pkg_resources.resource_filename(ASSETS, 'assets/navball_mask.png')
+ASSETS = 'assets'
+APP_ICON = pkg_resources.resource_filename(ASSETS, 'icon.ico')
+APP_ICON_LARGE = pkg_resources.resource_filename(ASSETS, 'icon.png')
+CURSOR_MASK = pkg_resources.resource_filename(ASSETS, 'cursor_mask.png')
+NAVBALL_MASK = pkg_resources.resource_filename(ASSETS, 'navball_mask.png')
 
 CSV_HEADERS_TR = [
     "Takım No",

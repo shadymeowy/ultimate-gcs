@@ -18,7 +18,7 @@ setup(
         'bingtiles @ git+https://github.com/shadymeowy/python-bingtiles',
         'QPrimaryFlightDisplay @ git+https://github.com/shadymeowy/QPrimaryFlightDisplay',
     ],
-    packages=['ultimate', 'ultimate.assets'],
+    packages=['ultimate', 'assets'],
     entry_points={
         'console_scripts': [
             'ultimate = ultimate.__main__:main',
@@ -27,7 +27,6 @@ setup(
     extras_require={
     },
     package_data={
-        'ultimate': ['assets/*.png'],
-        'ultimate': ['assets/*.ico'],
+        '': ['*.png', '*.ico']
     },
 )
