@@ -147,8 +147,8 @@ class MapWidget(QWidget):
         dx = event.pos().x() - self.mouse_pos.x()
         dy = event.pos().y() - self.mouse_pos.y()
         self.mouse_pos = event.pos()
-        self.xy0[0] -= dx / 256 / self.zoom
-        self.xy0[1] -= dy / 256 / self.zoom
+        """self.xy0[0] -= dx / 256 / self.zoom
+        self.xy0[1] -= dy / 256 / self.zoom"""
         self.update()
 
     def mouseReleaseEvent(self, event):
