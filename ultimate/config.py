@@ -53,3 +53,4 @@ BAUD_RATES = ['4800', '9600', '19200', '38400', '57600', '115200']
 COMMAND_NAMES_TR = ['Eve Dön', 'Görüntü Al', 'Hızlan']
 COMMAND_NAMES = ['Return to home', 'Take picture', 'Accelerate']
 COMMAND_VALUES = [1, 2, 3]
+COMMANDS = dict(zip(COMMAND_NAMES, COMMAND_VALUES))

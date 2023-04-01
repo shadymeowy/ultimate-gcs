@@ -161,7 +161,7 @@ class MainWindow(QMainWindow):
         print(f'Connecting to {serial_port} at {baud_rate} baud')
         string = f'{serial_port}:{baud_rate}'
         try:
-            self.send_cmd, self.read_packets, self.close_connection = make_connection(string)
+            self.send_cmd_2, self.read_packets, self.close_connection = make_connection(string)
             self.times = []
             self.accels = []
             self.vels = []
@@ -182,12 +182,15 @@ class MainWindow(QMainWindow):
             msg.exec()
 
     def send_cmd(self, cmd):
-        msg = QMessageBox()
-        msg.setIcon(QMessageBox.Critical)
-        msg.setText('Not connected')
-        msg.setWindowTitle('Error')
-        msg.setStandardButtons(QMessageBox.Ok)
-        msg.exec()
+        if hasattr(self, 'send_cmd_2'):
+            self.send_cmd_2(cmd)
+        else:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText('Not connected')
+            msg.setWindowTitle('Error')
+            msg.setStandardButtons(QMessageBox.Ok)
+            msg.exec()
 
     def read_packets(self):
         return None

@@ -8,13 +8,14 @@ from serial.tools.list_ports import comports
 
 import time
 from .common import *
+from .config import *
 
 
 def make_dummy_connection():
     packet = Packet()
 
     def send_cmd(cmd):
-        print(f'dummy sent {cmd}')
+        print(f'dummy sent {COMMANDS[cmd]}')
 
     queue = Queue()
 
@@ -66,7 +67,12 @@ def make_connection(name):
     queue = Queue()
 
     def send_cmd(cmd):
-        ser.write(cmd)
+        cmd = COMMANDS[cmd]
+        byte = cmd
+        inv_byte = ~byte & 0xFF
+        bytes_to_send = [byte, inv_byte]
+        bytes_to_send = bytes(bytes_to_send)
+        ser.write(bytes_to_send)
 
     running = True
 
