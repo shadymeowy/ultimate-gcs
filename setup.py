@@ -15,8 +15,8 @@ setup(
         'opencv-python',
         'pyserial',
         'crcmod',
-        'git+https://github.com/shadymeowy/python-bingtiles',
-        'git+https://github.com/shadymeowy/QPrimaryFlightDisplay',
+        'bingtiles @ git+https://github.com/shadymeowy/python-bingtiles',
+        'QPrimaryFlightDisplay @ git+https://github.com/shadymeowy/QPrimaryFlightDisplay',
     ],
     packages=['ultimate'],
     entry_points={
