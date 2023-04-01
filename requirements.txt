@@ -1,0 +1,9 @@
+PySide6
+numpy
+pyqtgraph
+PyOpenGL
+opencv-python
+pyserial
+crcmod
+git+https://github.com/shadymeowy/python-bingtiles
+git+https://github.com/shadymeowy/QPrimaryFlightDisplay

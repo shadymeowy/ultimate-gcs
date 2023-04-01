@@ -6,11 +6,7 @@ from OpenGL.GLU import *
 from OpenGL.GL import *
 from PIL import Image
 import numpy as np
-try:
-    from .blend_image import blend_image
-except ImportError:
-    from blend_image import blend_image
-
+from .blend_image import blend_image
 
 class Navball(QWidget):
     def __init__(self):
