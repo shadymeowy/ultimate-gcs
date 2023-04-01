@@ -8,9 +8,8 @@ from .MainWindow import MainWindow
 def main():
     app = QApplication(sys.argv)
     main_window = MainWindow()
-    main_window.show()
-    r = app.exec_()
-    main_window.cleanup()
+    main_window.showMaximized()
+    r = app.exec()
     sys.exit(r)
 
 

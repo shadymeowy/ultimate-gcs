@@ -1,21 +1,19 @@
 from setuptools import setup
 
 setup(
-    name='python-bing-tiles',
+    name='ultimate-gcs',
     version='0.0.1',
-    description='Small library for accessing Bing Static Maps API',
+    description='',
     author='Tolga Demirdal',
-    url='https://github.com/shadymeowy/python-bing-tiles',
+    url='https://github.com/shadymeowy/ultimate-gcs',
     setup_requires=[],
-    install_requires=[], # TODO
-    packages=['bingtiles'],
+    install_requires=[],  # TODO
+    packages=['ultimate'],
     entry_points={
         'console_scripts': [
-            'bingtiles = bingtiles.__main__:main',              
-        ],          
+            'ultimate = ultimate.__main__:main',
+        ],
     },
     extras_require={
-        'processbar': ['tqdm'],
     },
 )
- 
