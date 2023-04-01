@@ -7,6 +7,7 @@ from OpenGL.GL import *
 from PIL import Image
 import numpy as np
 from .blend_image import blend_image
+from . import config
 
 class Navball(QWidget):
     def __init__(self):
@@ -22,7 +23,7 @@ class Navball(QWidget):
     def update_style(self, palette=None):
         palette = palette or self.palette()
         color = palette.color(QPalette.Highlight)
-        self.cursor.setPixmap(QPixmap(blend_image("cursor_mask.png", color)))
+        self.cursor.setPixmap(QPixmap(blend_image(config.CURSOR_MASK, color)))
 
     def resizeEvent(self, e):
         super().resizeEvent(e)
@@ -53,7 +54,7 @@ class NavballGL(QOpenGLWidget):
     def update_style(self):
         self.update_gl = True
         self.color = self.palette().color(QPalette.Window)
-        img = Image.open(blend_image("navball_mask.png", self.color))
+        img = Image.open(blend_image(config.NAVBALL_MASK, self.color))
         self.img_data = np.asarray(img, np.int8)
         self.img_data = self.img_data[:, :, :3]
         print(self.img_data.shape)

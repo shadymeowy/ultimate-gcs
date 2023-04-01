@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(
-    name='ultimate-gcs',
+    name='ultimate',
     version='0.0.1',
     description='',
     author='Tolga Demirdal',
@@ -26,4 +26,9 @@ setup(
     },
     extras_require={
     },
+    package_data={
+        'ultimate': ['*.png'],
+        'ultimate': ['*.ico'],
+    },
+    include_package_data=True,
 )
