@@ -7,7 +7,17 @@ setup(
     author='Tolga Demirdal',
     url='https://github.com/shadymeowy/ultimate-gcs',
     setup_requires=[],
-    install_requires=[],  # TODO
+    install_requires=[
+        'PySide6',
+        'numpy',
+        'pyqtgraph',
+        'PyOpenGL',
+        'opencv-python',
+        'pyserial',
+        'crcmod',
+        'git+https://github.com/shadymeowy/python-bingtiles',
+        'git+https://github.com/shadymeowy/QPrimaryFlightDisplay',
+    ],
     packages=['ultimate'],
     entry_points={
         'console_scripts': [
