@@ -1,0 +1,122 @@
+from PySide6.QtWidgets import *
+from PySide6.QtGui import *
+from PySide6.QtCore import *
+from pyqtgraph import PlotWidget, mkPen, setConfigOptions
+
+
+class CustomGraph(QWidget):
+    def __init__(self, title, *args, **kargs):
+        super().__init__()
+        self.small_font_family = "Segoe UI"
+        self.small_font_size = 10
+        setConfigOptions(antialias=True)
+        self.title = title
+        self.graph = PlotWidget(self, title=title, *args, **kargs)
+        r = self.size()
+        self.graph.setGeometry(0, 0, r.width(), r.height())
+        self.x = []
+        self.y = []
+        self.range = [-1, 1]
+        self.plotdata = None
+        self.update_style()
+        QApplication.instance().paletteChanged.connect(self.update_style)
+
+    def resizeEvent(self, e):
+        super().resizeEvent(e)
+        r = self.size()
+        self.graph.setGeometry(0, 0, r.width(), r.height())
+
+    def plot(self):
+        rn = self.range
+        x = self.x
+        y = self.y
+        if not self.plotdata:
+            self.plotdata = self.graph.plot(
+                x, y, pen=mkPen(color=self.hcolor, width=2))
+        while y[-1] > rn[1]:
+            rn[1] *= 2
+        while y[-1] < rn[0]:
+            rn[0] *= 2
+        self.graph.plotItem.setRange(
+            xRange=(0, (x[-1] // 20 + 1) * 20), yRange=rn, disableAutoRange=True)
+        self.plotdata.setData(x, y)
+
+    def update_style(self, palette=None):
+        palette = palette or self.palette()
+        bgcolor = palette.color(self.backgroundRole())
+        bcolor = palette.color(QPalette.Base)
+        fgcolor = palette.color(QPalette.WindowText)
+        self.hcolor = palette.color(QPalette.Active, QPalette.Highlight)
+        self.graph.setBackground(bgcolor)
+        self.setStyleSheet("background-color:{};".format(bgcolor.name()))
+        self.graph.plotItem.vb.setBackgroundColor(bcolor)
+        self.graph.setTitle(
+            "<span style=\"color:{};font-family:Sans-serif;font-size:7pt\">{}</span>".format(fgcolor.name(), self.title))
+        l = self.graph.getAxis("left")
+        b = self.graph.getAxis("bottom")
+        t = self.graph.getAxis("top")
+        r = self.graph.getAxis("right")
+        self.graph.showAxis('top')
+        self.graph.showAxis('right')
+        t.style['showValues'] = False
+        r.style['showValues'] = False
+        small_font = QFont(self.small_font_family)
+        small_font.setPixelSize(self.small_font_size)
+        l.setTickFont(small_font)
+        b.setTickFont(small_font)
+        pen = mkPen(fgcolor, width=1)
+        l.setTextPen(pen)
+        b.setTextPen(pen)
+        l.setStyle(tickTextOffset=2)
+        b.setStyle(tickTextOffset=0)
+        l.setZValue(0)
+        b.setZValue(0)
+        t.setZValue(0)
+        r.setZValue(0)
+        l.setPen(pen)
+        b.setPen(pen)
+        t.setPen(pen)
+        r.setPen(pen)
+        l.style['tickLength'] = 5
+        b.style['tickLength'] = 5
+        t.style['tickLength'] = 0
+        r.style['tickLength'] = 0
+        l.setWidth(18)
+        if self.plotdata:
+            self.plotdata = None
+            self.plot()
+
+
+if __name__ == "__main__":
+    import sys
+    import numpy as np
+
+    class MainWindow(QMainWindow):
+        def __init__(self, parent=None):
+            super(MainWindow, self).__init__(parent)
+            self.timer = QTimer(self)
+            self.customgraph = CustomGraph("Sine")
+            self.customgraph.setParent(self)
+            size = self.size()
+            self.customgraph.setGeometry(0, 0, size.width(), size.height())
+            self.timer.timeout.connect(self.update_widget)
+            self.timer.start(1000 / 60)
+            self.time = 0
+
+        def update_widget(self):
+            self.time += 1 / 60
+            self.customgraph.x = np.linspace(
+                0, self.time, int(self.time * 10) + 10)
+            self.customgraph.y = np.sin(self.customgraph.x)
+            self.customgraph.plot()
+
+        def resizeEvent(self, e):
+            super().resizeEvent(e)
+            size = self.size()
+            self.customgraph.setGeometry(0, 0, size.width(), size.height())
+
+    app = QApplication(sys.argv)
+    main_window = MainWindow()
+    main_window.show()
+    r = app.exec()
+    sys.exit(r)
