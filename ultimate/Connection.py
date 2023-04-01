@@ -62,7 +62,7 @@ def make_connection(name):
     if port == 'dummy':
         return make_dummy_connection()
 
-    ser = serial.Serial(port, baudrate, timeout=1)
+    ser = serial.Serial(port, baudrate, timeout=0.2)
     queue = Queue()
 
     def send_cmd(cmd):
@@ -72,12 +72,12 @@ def make_connection(name):
 
     def run():
         while running:
-            data = ser.read(52, timeout=0.1)
-            if len(data) < 52:
+            data = ser.read(54)
+            if len(data) < 54:
                 while ser.in_waiting > 0:
                     ser.read(ser.in_waiting)
                 continue
-            packet = packet_frombytes(data[:52])
+            packet = packet_frombytes(data[:54])
             queue.put(packet)
             time.sleep(0.1)
 
