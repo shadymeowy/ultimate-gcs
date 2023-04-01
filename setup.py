@@ -18,7 +18,7 @@ setup(
         'bingtiles @ git+https://github.com/shadymeowy/python-bingtiles',
         'QPrimaryFlightDisplay @ git+https://github.com/shadymeowy/QPrimaryFlightDisplay',
     ],
-    packages=['ultimate'],
+    packages=['ultimate', 'ultimate.assets'],
     entry_points={
         'console_scripts': [
             'ultimate = ultimate.__main__:main',
