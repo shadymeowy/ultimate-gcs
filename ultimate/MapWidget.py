@@ -99,8 +99,13 @@ class MapWidget(QWidget):
                     self.pool.apply_async(self.fetcher, ((x, y, lod),))
                     count += 1
                     continue
-                qimage = ImageQt(image)
-                painter.drawImage(QRectF(*rect), qimage)
+                try:
+                    qimage = ImageQt(image)
+                    painter.drawImage(QRectF(*rect), qimage)
+                except Exception as e:
+                    print(e)
+                    self.pool.apply_async(self.fetcher, ((x, y, lod),))
+                    count += 1
         if count > 0:
             return False
         return True
